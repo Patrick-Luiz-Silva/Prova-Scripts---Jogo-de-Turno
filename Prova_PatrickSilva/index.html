@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Herói vs Vilão</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- Personagem Herói -->
+    <div class="personagem">
+        <div class="barra-vida" :style="{width: heroi.vida + '%'}">{{ heroi.vida }}</div>
+        <div class="sprite">
+            <!-- Caminho da imagem do herói, com ref -->
+            <img ref="heroiImg" src="images/heroi.gif" alt="Herói" v-if="heroi.vida > 0">
+        </div>
+        <h1>Herói</h1>
+        <div class="acoes">
+            <button @click="atacar(true)" :disabled="jogoFinalizado">Atacar</button>
+            <button @click="defender(true)" :disabled="jogoFinalizado">Defender</button>
+            <button @click="usarPocao(true)" :disabled="jogoFinalizado">Usar Poção</button>
+            <button @click="correr(true)" :disabled="jogoFinalizado">Correr</button>
+        </div>
+    </div>
+
+    <!-- Personagem Vilão -->
+    <div class="personagem">
+        <div class="barra-vida" :style="{width: vilao.vida + '%'}">{{ vilao.vida }}</div>
+        <div class="sprite">
+            <!-- Caminho da imagem do vilão, com ref -->
+            <img ref="vilaoImg" src="images/vilao.webp" alt="Vilão" v-if="vilao.vida > 0">
+        </div>
+        <h1>Vilão</h1>
+    </div>
+
+    <!-- Histórico das ações -->
+    <div class="historico-acoes">
+        <ul id="historico-lista">
+            <li v-for="acao in historico">{{ acao }}</li>
+        </ul>
+    </div>
+
+    <!-- Mensagem do Vencedor -->
+    <div v-if="vencedor" class="vencedor">
+        <h2>{{ vencedor }} venceu!</h2>
+    </div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
